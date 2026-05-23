@@ -70,120 +70,134 @@ export default function App() {
           className={`absolute inset-0 transition-all duration-750 z-0 backdrop-blur-[1px] ${
             isDark 
               ? "bg-[#000814]/20" 
-              : "bg-black/50"
+              : "bg-[#000814]/60"
           }`} 
         />
 
         {/* Outer wrapper filling the screen height with layout */}
         <div className="relative h-full flex flex-col z-10 w-full">
           {/* Navbar sits above everything and does not interfere with hero content positioning */}
-          <header className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 w-full flex items-center justify-between relative z-20">
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                triggerToast(isDark ? "Welcome to the Flight Cabin" : "Welcome into the Sunbeams");
-              }}
-              className="text-xl md:text-xl lg:text-2xl font-semibold tracking-tight transition-colors duration-500 text-text-primary"
-            >
-              SkyElite
-            </a>
+          <header className={`w-full relative z-20 transition-all duration-500 border-b ${
+            isDark 
+              ? "bg-white/90 backdrop-blur border-card-border" 
+              : "bg-black/80 backdrop-blur border-white/5"
+          }`}>
+            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-5 flex items-center justify-between">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  triggerToast(isDark ? "Welcome to the Flight Cabin" : "Welcome into the Sunbeams");
+                }}
+                className={`text-xl md:text-xl lg:text-2xl font-semibold tracking-tight transition-colors duration-500 ${isDark ? "text-[#000814]" : "text-white"}`}
+              >
+                SkyElite
+              </a>
 
-            {/* Desktop Nav Links centered in the middle of the screen */}
-            <nav className="hidden lg:flex gap-4 md:gap-5 lg:gap-8 absolute left-1/2 -translate-x-1/2">
-              {navLinks.map((link) => (
-                <button
-                  key={link}
-                  onClick={() => scrollToSection(link)}
-                  className="transition-colors duration-500 font-medium text-sm md:text-sm lg:text-base tracking-wide cursor-pointer border-none bg-transparent outline-none text-text-primary/80 hover:text-text-primary"
-                >
-                  {link}
-                </button>
-              ))}
-            </nav>
-
-            {/* Right Controls: Mode Switcher, Quick Shuttle & Mobile Menu toggle */}
-            <div className="flex items-center gap-3 md:gap-4 lg:gap-8">
-              {/* Dark/Light Mode Theme Toggle Switch Pill */}
-              <div className="hidden lg:flex items-center gap-2.5">
-                <span className="text-xs font-semibold tracking-widest hidden lg:block transition-colors duration-500 text-text-secondary">
-                  {isDark ? "LIGHT" : "DARK"}
-                </span>
-                
-                <button
-                  id="dark-light-mode-toggle"
-                  onClick={() => {
-                    const nextDark = !isDark;
-                    setIsDark(nextDark);
-                    triggerToast(nextDark ? "Light mode activated" : "Dark mode activated");
-                  }}
-                  style={{ backgroundColor: isDark ? "#e6eeff" : "#001233" }}
-                  className={`relative w-12 h-6 lg:w-16 lg:h-8 rounded-full p-0.5 lg:p-1 cursor-pointer transition-all duration-500 shadow-inner flex items-center outline-none border ${
-                    isDark 
-                      ? "border-[#0066CC]/20 shadow-[0_0_12px_rgba(0,102,204,0.35)]" 
-                      : "border-[#0066CC]/20 shadow-[0_0_12px_rgba(0,102,204,0.35)]"
-                  }`}
-                  aria-label="Toggle dark mode theme"
-                >
-                  {/* Sliding knob with transitions */}
-                  <div
-                    style={{
-                      backgroundColor: isDark ? "#000814" : "#ffffff",
-                      boxShadow: "0 0 10px 2px rgba(0, 102, 204, 0.7)"
-                    }}
-                    className={`absolute left-0.5 lg:left-1 w-5 h-5 lg:w-6 lg:h-6 rounded-full flex items-center justify-center transition-all duration-500 ease-in-out ${
+              {/* Desktop Nav Links centered in the middle of the screen */}
+              <nav className="hidden lg:flex gap-4 md:gap-5 lg:gap-8 absolute left-1/2 -translate-x-1/2">
+                {navLinks.map((link) => (
+                  <button
+                    key={link}
+                    onClick={() => scrollToSection(link)}
+                    className={`transition-colors duration-500 font-medium text-sm md:text-sm lg:text-base tracking-wide cursor-pointer border-none bg-transparent outline-none ${
                       isDark 
-                        ? "translate-x-[24px] lg:translate-x-[32px]" 
-                        : "translate-x-0"
+                        ? "text-[#000814]/80 hover:text-[#000814]" 
+                        : "text-white/80 hover:text-white"
                     }`}
                   >
-                    <AnimatePresence mode="wait">
-                      {isDark ? (
-                        <motion.div
-                          key="sun"
-                          initial={{ opacity: 0, rotate: -40 }}
-                          animate={{ opacity: 1, rotate: 0 }}
-                          exit={{ opacity: 0, rotate: 40 }}
-                          transition={{ duration: 0.25 }}
-                          className="flex items-center justify-center"
-                        >
-                          <Sun className="w-3.5 h-3.5 text-accent fill-accent/20" />
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="moon"
-                          initial={{ opacity: 0, rotate: 40 }}
-                          animate={{ opacity: 1, rotate: 0 }}
-                          exit={{ opacity: 0, rotate: -40 }}
-                          transition={{ duration: 0.25 }}
-                          className="flex items-center justify-center"
-                        >
-                          <Moon className="w-3.5 h-3.5 text-accent fill-accent/20" />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </button>
-              </div>
+                    {link}
+                  </button>
+                ))}
+              </nav>
 
-              {/* Quick Shuttle Button */}
-              <button
-                onClick={() => triggerToast("Initializing Quick Shuttle scheduling...")}
-                className="hidden lg:inline-block px-3 py-1.5 text-xs lg:px-5 lg:py-2 lg:text-sm font-semibold rounded-full bg-btn-book-bg text-btn-book-text hover:opacity-90 transition-all cursor-pointer border-none outline-none whitespace-nowrap"
-              >
-                QUICK SHUTTLE →
-              </button>
-
-              {/* Mobile menu trigger button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 transition-colors duration-500 focus:outline-none cursor-pointer text-text-primary"
-                aria-label="Toggle Navigation Menu"
-              >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
-          </header>
+             {/* Right Controls: Mode Switcher, Quick Shuttle & Mobile Menu toggle */}
+             <div className="flex items-center gap-3 md:gap-4 lg:gap-8">
+               {/* Dark/Light Mode Theme Toggle Switch Pill */}
+               <div className="hidden lg:flex items-center gap-2.5">
+                 <span className={`text-xs font-semibold tracking-widest hidden lg:block transition-colors duration-500 ${isDark ? "text-[#3a5a8a]" : "text-[#7a9cc4]"}`}>
+                   {isDark ? "LIGHT" : "DARK"}
+                 </span>
+                 
+                 <button
+                   id="dark-light-mode-toggle"
+                   onClick={() => {
+                     const nextDark = !isDark;
+                     setIsDark(nextDark);
+                     triggerToast(nextDark ? "Light mode activated" : "Dark mode activated");
+                   }}
+                   style={{ backgroundColor: isDark ? "#e6eeff" : "#001233" }}
+                   className={`relative w-12 h-6 lg:w-16 lg:h-8 rounded-full p-0.5 lg:p-1 cursor-pointer transition-all duration-500 shadow-inner flex items-center outline-none border ${
+                     isDark 
+                       ? "border-[#0066CC]/20 shadow-[0_0_12px_rgba(0,102,204,0.35)]" 
+                       : "border-[#0066CC]/20 shadow-[0_0_12px_rgba(0,102,204,0.35)]"
+                   }`}
+                   aria-label="Toggle dark mode theme"
+                 >
+                   {/* Sliding knob with transitions */}
+                   <div
+                     style={{
+                       backgroundColor: isDark ? "#000814" : "#ffffff",
+                       boxShadow: "0 0 10px 2px rgba(0, 102, 204, 0.7)"
+                     }}
+                     className={`absolute left-0.5 lg:left-1 w-5 h-5 lg:w-6 lg:h-6 rounded-full flex items-center justify-center transition-all duration-500 ease-in-out ${
+                       isDark 
+                         ? "translate-x-[24px] lg:translate-x-[32px]" 
+                         : "translate-x-0"
+                     }`}
+                   >
+                     <AnimatePresence mode="wait">
+                       {isDark ? (
+                         <motion.div
+                           key="sun"
+                           initial={{ opacity: 0, rotate: -40 }}
+                           animate={{ opacity: 1, rotate: 0 }}
+                           exit={{ opacity: 0, rotate: 40 }}
+                           transition={{ duration: 0.25 }}
+                           className="flex items-center justify-center"
+                         >
+                           <Sun className="w-3.5 h-3.5 text-accent fill-accent/20" />
+                         </motion.div>
+                       ) : (
+                         <motion.div
+                           key="moon"
+                           initial={{ opacity: 0, rotate: 40 }}
+                           animate={{ opacity: 1, rotate: 0 }}
+                           exit={{ opacity: 0, rotate: -40 }}
+                           transition={{ duration: 0.25 }}
+                           className="flex items-center justify-center"
+                         >
+                           <Moon className="w-3.5 h-3.5 text-accent fill-accent/20" />
+                         </motion.div>
+                       )}
+                     </AnimatePresence>
+                   </div>
+                 </button>
+               </div>
+ 
+               {/* Quick Shuttle Button */}
+               <button
+                 onClick={() => triggerToast("Initializing Quick Shuttle scheduling...")}
+                 className={`hidden lg:inline-block px-3 py-1.5 text-xs lg:px-5 lg:py-2 lg:text-sm font-semibold rounded-full transition-all duration-300 cursor-pointer border-none outline-none whitespace-nowrap ${
+                   isDark 
+                     ? "bg-[#000814] text-white hover:bg-[#001233]" 
+                     : "bg-[#0066CC] text-white hover:bg-[#0052a3]"
+                 }`}
+               >
+                 QUICK SHUTTLE →
+               </button>
+ 
+               {/* Mobile menu trigger button */}
+               <button
+                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                 className={`lg:hidden p-2 transition-all duration-300 focus:outline-none cursor-pointer ${isDark ? "text-[#000814]" : "text-white"}`}
+                 aria-label="Toggle Navigation Menu"
+               >
+                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+               </button>
+             </div>
+           </div>
+         </header>
 
           {/* Mobile Dropdown Menu Drawer */}
           <AnimatePresence>
@@ -210,7 +224,7 @@ export default function App() {
 
                 {/* Mobile Menu Theme Toggle */}
                 <div className="flex items-center justify-between border-t border-card-border pt-4 mt-2">
-                  <span className="text-xs font-semibold tracking-widest transition-colors duration-500 text-text-secondary">
+                  <span className={`text-xs font-semibold tracking-widest transition-colors duration-500 ${isDark ? "text-[#3a5a8a]" : "text-[#7a9cc4]"}`}>
                     {isDark ? "LIGHT" : "DARK"}
                   </span>
                   
@@ -253,7 +267,11 @@ export default function App() {
                     setIsMobileMenuOpen(false);
                     triggerToast("Initializing Quick Shuttle scheduling...");
                   }}
-                  className="w-full text-center py-2.5 text-sm font-semibold rounded-full bg-btn-book-bg text-btn-book-text mt-2 hover:opacity-95 transition-all cursor-pointer border-none outline-none"
+                  className={`w-full text-center py-2.5 text-sm font-semibold rounded-full mt-2 transition-all duration-300 cursor-pointer outline-none border-none ${
+                    isDark 
+                      ? "bg-[#000814] text-white hover:bg-[#001233]" 
+                      : "bg-[#0066CC] text-white hover:bg-[#0052a3]"
+                  }`}
                 >
                   QUICK SHUTTLE →
                 </button>
@@ -266,22 +284,22 @@ export default function App() {
             <div className="flex flex-col items-center text-center gap-2 px-4 w-full">
               
               {/* Grouped Private Jets label */}
-              <span className="text-xs sm:text-sm font-semibold tracking-widest uppercase mb-2 transition-colors duration-500 text-accent">
+              <span className="text-xs sm:text-sm font-semibold tracking-widest uppercase mb-2 transition-colors duration-500 text-[#0066CC]">
                 PRIVATE JETS
               </span>
 
               {/* Premium Header Line */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-normal leading-none tracking-tighter transition-colors duration-500 text-text-primary/40">
+              <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-normal leading-none tracking-tighter transition-colors duration-500 ${isDark ? "text-[#3a5a8a]" : "text-[#7a9cc4]"}`}>
                 Premium.
               </h1>
 
               {/* Accessible Header Line */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-normal leading-none tracking-tighter -mt-1 sm:-mt-2 md:-mt-3 transition-colors duration-500 text-text-primary">
+              <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-normal leading-none tracking-tighter -mt-1 sm:-mt-2 md:-mt-3 transition-colors duration-500 ${isDark ? "text-[#000814]" : "text-white"}`}>
                 Accessible.
               </h1>
 
               {/* Hero Subtitle */}
-              <p className="text-base sm:text-lg mt-4 max-w-xl transition-colors duration-500 text-text-secondary">
+              <p className={`text-base sm:text-lg mt-4 max-w-xl transition-colors duration-500 ${isDark ? "text-[#3a5a8a]" : "text-[#7a9cc4]"}`}>
                 Your dedication deserves recognition.
               </p>
 
@@ -289,14 +307,22 @@ export default function App() {
               <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center w-full max-w-xs sm:max-w-none px-4">
                 <button
                   onClick={() => scrollToSection("Story")}
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-full font-medium transition-colors cursor-pointer border-none outline-none bg-btn-discover-bg text-btn-discover-text hover:opacity-90"
+                  className={`w-full sm:w-auto px-6 py-2.5 rounded-full font-medium transition-all duration-300 cursor-pointer outline-none border ${
+                    isDark 
+                      ? "bg-transparent text-[#000814] border-[#000814]/30 hover:bg-[#000814]/10" 
+                      : "bg-transparent text-white border-white/40 hover:bg-white/10"
+                  }`}
                 >
                   Discover
                 </button>
                 
                 <button
                   onClick={() => scrollToSection("Rates")}
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-full transition-colors cursor-pointer border-none outline-none bg-btn-book-bg text-btn-book-text hover:opacity-90 shadow-lg shadow-accent-light/10"
+                  className={`w-full sm:w-auto px-6 py-2.5 rounded-full transition-all duration-300 cursor-pointer outline-none border-none hover:scale-[1.01] ${
+                    isDark 
+                      ? "bg-[#000814] text-white hover:bg-[#001233]" 
+                      : "bg-[#0066CC] text-white hover:bg-[#0052a3]"
+                  }`}
                 >
                   Book Now
                 </button>
