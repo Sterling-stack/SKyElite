@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --page-bg: #000000;
+  --section-alt-bg: #000814;
+  --card-bg: #001233;
+  --card-border: rgba(0, 100, 200, 0.15);
+  --text-primary: #ffffff;
+  --text-secondary: #7a9cc4;
+  --accent: #0066CC;
+  --accent-light: #0066CC;
+  --accent-glow: rgba(0, 102, 204, 0.2);
+  --btn-book-bg: #0066CC;
+  --btn-book-text: #ffffff;
+  --btn-discover-bg: transparent;
+  --btn-discover-text: #ffffff;
+  --navbar-bg: rgba(0, 0, 0, 0.9);
+  --navbar-text: #ffffff;
+  --faq-divider: rgba(0, 102, 204, 0.15);
+  --footer-bg: #000000;
+  --footer-text: #ffffff;
+  --footer-muted: #7a9cc4;
+  --utc-badge-bg: rgba(0, 102, 204, 0.15);
+  --utc-badge-text: #0066CC;
+  --elite-card-bg: #0066CC;
+  --elite-card-text: #ffffff;
+  --elite-card-border: #0066CC;
+  --elite-badge-bg: #ffffff;
+  --elite-badge-text: #0066CC;
+  --dots-inactive: rgba(0, 102, 204, 0.2);
+}
+
+.dark {
+  --page-bg: #ffffff;
+  --section-alt-bg: #f0f4ff;
+  --card-bg: #e6eeff;
+  --card-border: rgba(0, 100, 200, 0.12);
+  --text-primary: #000814;
+  --text-secondary: #3a5a8a;
+  --accent: #0066CC;
+  --accent-light: #0066CC;
+  --accent-glow: rgba(0, 102, 204, 0.2);
+  --btn-book-bg: #000814;
+  --btn-book-text: #ffffff;
+  --btn-discover-bg: transparent;
+  --btn-discover-text: #000814;
+  --navbar-bg: rgba(255, 255, 255, 0.9);
+  --navbar-text: #000814;
+  --faq-divider: rgba(0, 100, 200, 0.12);
+  --footer-bg: #000814;
+  --footer-text: #ffffff;
+  --footer-muted: #3a5a8a;
+  --utc-badge-bg: rgba(0, 102, 204, 0.15);
+  --utc-badge-text: #0066CC;
+  --elite-card-bg: #000814;
+  --elite-card-text: #ffffff;
+  --elite-card-border: #0066CC;
+  --elite-badge-bg: #ffffff;
+  --elite-badge-text: #0066CC;
+  --dots-inactive: rgba(0, 8, 20, 0.2);
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-page-bg: var(--page-bg);
+  --color-sec-bg: var(--section-alt-bg);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-btn-book-bg: var(--btn-book-bg);
+  --color-btn-book-text: var(--btn-book-text);
+  --color-btn-discover-bg: var(--btn-discover-bg);
+  --color-btn-discover-text: var(--btn-discover-text);
+  --color-navbar-bg: var(--navbar-bg);
+  --color-navbar-text: var(--navbar-text);
+  --color-faq-divider: var(--faq-divider);
+  --color-footer-bg: var(--footer-bg);
+  --color-footer-text: var(--footer-text);
+  --color-footer-muted: var(--footer-muted);
+  --color-utc-badge-bg: var(--utc-badge-bg);
+  --color-utc-badge-text: var(--utc-badge-text);
+  --color-elite-card-bg: var(--elite-card-bg);
+  --color-elite-card-text: var(--elite-card-text);
+  --color-elite-card-border: var(--elite-card-border);
+  --color-elite-badge-bg: var(--elite-badge-bg);
+  --color-elite-badge-text: var(--elite-badge-text);
+  --color-dots-inactive: var(--dots-inactive);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Custom premium Button & Dot configurations */
+.bg-btn-book-bg {
+  background-color: var(--btn-book-bg) !important;
+  color: var(--btn-book-text) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bg-btn-book-bg:hover {
+  background-color: #0052a3 !important;
+  transform: translateY(-1px);
+}
+.dark .bg-btn-book-bg:hover {
+  background-color: #001233 !important;
+  transform: translateY(-1px);
+}
+
+.bg-btn-discover-bg {
+  background-color: transparent !important;
+  color: var(--btn-discover-text) !important;
+  border: 1px solid rgba(0, 102, 204, 0.4) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bg-btn-discover-bg:hover {
+  background-color: rgba(0, 102, 204, 0.1) !important;
+  transform: translateY(-1px);
+}
+
+.dark .bg-btn-discover-bg {
+  border: 1px solid rgba(0, 8, 20, 0.3) !important;
+}
+.dark .bg-btn-discover-bg:hover {
+  background-color: rgba(0, 8, 20, 0.1) !important;
+  transform: translateY(-1px);
+}
+
+.bg-dots-inactive {
+  background-color: var(--dots-inactive) !important;
+}
+
+/* Precise active dot colors in light mode */
+.dark .bg-accent.h-2 {
+  background-color: #000814 !important;
+}
+
+/* Custom scrollbar to match premium aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 102, 204, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 102, 204, 0.4);
+}
+.dark ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(0, 8, 20, 0.2);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 8, 20, 0.4);
+}

@@ -1,0 +1,6 @@
+{
+  "name": "SkyElite",
+  "description": "Premium private jet leasing and aviation services landing page with an immersive background video.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
